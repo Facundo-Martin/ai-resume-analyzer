@@ -33,6 +33,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        {/* Load puter.js for all of our BE functionalities */}
+        <script src="https://js.puter.com/v2/"></script>
+
         {children}
         <ScrollRestoration />
         <Scripts />
