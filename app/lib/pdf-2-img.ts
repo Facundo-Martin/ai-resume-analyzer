@@ -29,10 +29,7 @@ export async function convertPdfToImage(
   file: File
 ): Promise<PdfConversionResult> {
   try {
-    console.log("Starting PDF conversion for:", file.name, "Size:", file.size);
-
     const lib = await loadPdfJs();
-    console.log("PDF.js loaded successfully");
 
     const arrayBuffer = await file.arrayBuffer();
     console.log("ArrayBuffer created, size:", arrayBuffer.byteLength);
