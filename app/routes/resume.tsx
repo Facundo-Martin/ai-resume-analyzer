@@ -2,6 +2,9 @@ import { Link, useNavigate, useParams } from "react-router";
 import type { Route } from "./+types/resume";
 import { useEffect, useState } from "react";
 import { usePuterStore } from "~/lib/puter";
+import { Summary } from "~/components/summary";
+import { ATS } from "~/components/ats";
+import { Details } from "~/components/details";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -17,7 +20,7 @@ export default function Resume() {
 
   const [imageUrl, setImageUrl] = useState("");
   const [resumeUrl, setResumeUrl] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
 
   useEffect(() => {
     const loadResume = async () => {
@@ -83,13 +86,18 @@ export default function Resume() {
           {feedback ? (
             <div className="flex flex-col gap-8 animate-in fade-in duration-1000">
               Summary ATS details
+              <Summary feedback={feedback} />
+              <ATS
+                score={feedback.ATS.score || 0}
+                suggestions={feedback.ATS.tips || []}
+              />
+              <Details feedback={feedback} />
             </div>
           ) : (
             <img src="/images/resume-scan-2.gif" className="w-full" />
           )}
         </section>
       </div>
-      <div>resume {uuid}</div>
     </main>
   );
 }
